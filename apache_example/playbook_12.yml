@@ -1,0 +1,10 @@
+- hosts: Switch6
+  collections:
+   - arubanetworks.aoscx
+  tasks:
+   - name: Adding new vlan
+     aoscx_vlan:
+      vlan_id: '50'
+      name: 'vlan50'
+      description: 'This is a new VLAN'
+
