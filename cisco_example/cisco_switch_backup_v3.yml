@@ -1,0 +1,17 @@
+- name: BACKUP ROUTER v3
+  hosts: cisco
+  connection: network_cli
+  gather_facts: no
+
+  tasks:
+    - name: BACKUP THE CONFIG
+      ios_config:
+        backup: yes
+      register: config_output
+
+# backup path
+  - name: save output to /etc/ansible/backups 
+  copy: 
+  content: "{{ config.stdout[0] }}"
+  dest: "/show_run_{{ inventory_hostname }}.txt"
+
