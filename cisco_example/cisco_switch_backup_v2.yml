@@ -6,8 +6,8 @@
 #  connection: local
 
 --
-- name: backup cisco routers
-  hosts: all
+#- name: backup cisco routers
+- hosts: all
   connection: network_cli
 
 # module required v1
