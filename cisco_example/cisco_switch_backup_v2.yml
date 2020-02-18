@@ -1,0 +1,37 @@
+---
+# host prueba
+
+#- hosts: all
+#  gather_facts: true
+#  connection: local
+
+--
+- name: backup cisco routers
+  hosts: all
+  connection: network_cli
+
+# module required v1
+#  tasks:
+#   - name: show run 
+#   ios_command:
+#   commands:
+#     - show run 
+#     host: "{{ ansible_host }}"
+
+# module required v2
+  tasks:
+  - name: Backup router configuration
+    ios_config:
+      backup: yes
+
+# user key master for cisco switches
+     username: username
+     password: password
+     register: config
+
+# backup path
+  - name: save output to /etc/ansible/backups 
+  copy: 
+  content: "{{ config.stdout[0] }}"
+  dest: "/show_run_{{ inventory_hostname }}.txt"
+
