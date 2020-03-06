@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+   - name: save bkup etc/ansible/backups
+     ios_config:
+#        provider: "{{ provider_credenciales }}"
+       backup: yes
+       backup_options:
+#          filename: backup.cfg
+         dir_path: /etc/ansible/backups
